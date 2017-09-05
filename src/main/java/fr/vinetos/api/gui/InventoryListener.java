@@ -35,7 +35,7 @@
  *
  *==============================================================================
  */
-package fr.vinetos.bukkitguiapi;
+package fr.vinetos.api.gui;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Player;

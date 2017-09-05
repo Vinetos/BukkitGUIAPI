@@ -35,7 +35,7 @@
  *
  *==============================================================================
  */
-package fr.vinetos.bukkitguiapi;
+package fr.vinetos.api.gui;
 
 import org.apache.commons.lang.Validate;
 import org.bukkit.Bukkit;

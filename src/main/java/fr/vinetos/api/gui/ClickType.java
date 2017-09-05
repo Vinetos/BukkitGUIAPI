@@ -35,43 +35,23 @@
  *
  *==============================================================================
  */
-package fr.vinetos.bukkitguiapi;
+package fr.vinetos.api.gui;
 
-import org.bukkit.inventory.ItemStack;
+public enum ClickType {
 
-public class ItemStackSlot {
+    LEFT_CLICK,
+    RIGHT_CLICK,
+    SHIFT_CLICK,
+    OTHER;
 
-    private final ItemStack itemStack;
-    private final int slot;
-
-    public ItemStackSlot(ItemStack itemStack, int slot) {
-        this.itemStack = itemStack;
-        this.slot = slot;
+    public static ClickType get(boolean isLeftClick, boolean isShiftClick, boolean isRightClick) {
+        if (isRightClick)
+            return RIGHT_CLICK;
+        if (isLeftClick)
+            return LEFT_CLICK;
+        if (isShiftClick)
+            return SHIFT_CLICK;
+        return OTHER;
     }
 
-    public ItemStack getItemStack() {
-        return itemStack;
-    }
-
-    public int getSlot() {
-        return slot;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ItemStackSlot that = (ItemStackSlot) o;
-
-        if (slot != that.slot) return false;
-        return itemStack != null ? itemStack.equals(that.itemStack) : that.itemStack == null;
-    }
-
-    @Override
-    public int hashCode() {
-        int result = itemStack != null ? itemStack.hashCode() : 0;
-        result = 31 * result + slot;
-        return result;
-    }
 }
