@@ -28,15 +28,6 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
-            <!-- Change directory of created .jar -->
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-jar-plugin</artifactId>
-                <version>2.3.1</version>
-                <configuration>
-                    <outputDirectory>jar/plugins</outputDirectory>
-                </configuration>
-            </plugin>
         </plugins>
         <!-- Filter resource (to automate version in plugin.yml) -->
         <resources>
