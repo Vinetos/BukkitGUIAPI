@@ -40,7 +40,7 @@ package fr.vinetos.api.gui;
 public class GuiPlugin {
 
     public GuiPlugin() {
-        BukkitGuiAPI.getOrCreateInventory(MyInventory.class);
+        BukkitGUIAPI.getOrCreateInventory(MyInventory.class);
     }
 
     public static void main(String[] args) {
