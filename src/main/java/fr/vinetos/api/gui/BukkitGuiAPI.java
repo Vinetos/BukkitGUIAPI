@@ -37,13 +37,27 @@
  */
 package fr.vinetos.api.gui;
 
-public class GuiPlugin {
+import org.bukkit.plugin.Plugin;
 
-    public GuiPlugin() {
-        BukkitGuiAPI.getOrCreateInventory(MyInventory.class);
+import java.util.Optional;
+
+public class BukkitGuiAPI {
+
+    public static void init(Plugin plugin) {
+        plugin.getServer().getPluginManager().registerEvents(new InventoryListener(), plugin);
     }
 
-    public static void main(String[] args) {
-        new GuiPlugin();
+    public static <T extends AbstractInventory> T getOrCreateInventory(Class<T> inventoryClass) {
+        Optional<AbstractInventory> any = AbstractInventory.getAbstractInventories().stream().filter(typeClass -> typeClass.getClass().equals(inventoryClass))
+                .findAny();
+
+        return (T) any.orElseGet(() -> {
+            try {
+                return inventoryClass.newInstance();
+            } catch (InstantiationException | IllegalAccessException e) {
+                throw new Error(e);
+            }
+        });
     }
+
 }

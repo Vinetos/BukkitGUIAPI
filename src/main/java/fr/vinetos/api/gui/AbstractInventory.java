@@ -45,7 +45,10 @@ import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -74,19 +77,6 @@ public abstract class AbstractInventory {
 //        this.inventories = new ArrayList<>();
 
         abstractInventories.add(this);
-    }
-
-    public static <T extends AbstractInventory> T getOrCreateInventory(Class<T> inventoryClass) {
-        Optional<AbstractInventory> any = abstractInventories.stream().filter(typeClass -> typeClass.getClass().equals(inventoryClass))
-                .findAny();
-
-        return (T) any.orElseGet(() -> {
-            try {
-                return inventoryClass.newInstance();
-            } catch (InstantiationException | IllegalAccessException e) {
-                throw new Error(e);
-            }
-        });
     }
 
     public static List<AbstractInventory> getAbstractInventories() {
