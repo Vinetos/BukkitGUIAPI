@@ -41,7 +41,7 @@ import org.bukkit.plugin.Plugin;
 
 import java.util.Optional;
 
-public class BukkitGuiAPI {
+public class BukkitGUIAPI {
 
     public static void init(Plugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(new InventoryListener(), plugin);
