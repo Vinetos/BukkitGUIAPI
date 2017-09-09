@@ -79,6 +79,10 @@ public abstract class AbstractInventory {
         abstractInventories.add(this);
     }
 
+    public static <T extends AbstractInventory> T getOrCreateInventory(Class<T> inventoryClass) {
+        return BukkitGUIAPI.getOrCreateInventory(inventoryClass);
+    }
+
     public static List<AbstractInventory> getAbstractInventories() {
         return Collections.unmodifiableList(abstractInventories);
     }
