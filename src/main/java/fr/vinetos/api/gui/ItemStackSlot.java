@@ -74,4 +74,10 @@ public class ItemStackSlot {
         result = 31 * result + slot;
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "ItemStackSlot{" + "itemStack=" + itemStack
+                + ",slot=" + slot + '}';
+    }
 }

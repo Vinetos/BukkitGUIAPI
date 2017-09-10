@@ -43,6 +43,8 @@ import java.util.Optional;
 
 public class BukkitGUIAPI {
 
+    static boolean DEBUG_MODE = false;
+
     public static void init(Plugin plugin) {
         plugin.getServer().getPluginManager().registerEvents(new InventoryListener(), plugin);
     }
@@ -58,6 +60,10 @@ public class BukkitGUIAPI {
                 throw new Error(e);
             }
         });
+    }
+
+    public static void setDebugMode(boolean debugMode) {
+        DEBUG_MODE = debugMode;
     }
 
 }

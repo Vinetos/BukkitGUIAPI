@@ -59,7 +59,7 @@ public abstract class AbstractInventory {
     private final String name;
     private final int slots;
     private String displayName;
-    private List<ItemStackSlot> items;
+    private ArrayList<ItemStackSlot> items;
     protected ItemStack opener;
     private Inventory inventory;
 //    private List<Inventory> inventories;
@@ -75,7 +75,7 @@ public abstract class AbstractInventory {
         this.items = new ArrayList<>();
         // TODO: 05/09/2017 Create pages with inventories
 //        this.inventories = new ArrayList<>();
-
+        log("Create inventory with properties");
         abstractInventories.add(this);
     }
 
@@ -177,10 +177,25 @@ public abstract class AbstractInventory {
 
     public void onItemClick(Player player, ItemStack itemStack, ClickType clickType, InventoryClickEvent event) {
         event.setCancelled(true);
+        log("onItemClick with " + player + ", " + itemStack + ", " + clickType);
     }
 
     public void onItemInteract(Player player, PlayerInteractEvent event) {
         event.setCancelled(true);
+        log("onItemInteract with " + player);
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getName() + '{' + "name=" + name
+                + ",slots=" + slots + ",displayName=" + displayName
+                + ",opener=" + opener + ",inventory=" + inventory +
+                ",items=" + items.toString() + '}';
+    }
+
+    private void log(String message) {
+        if (BukkitGUIAPI.DEBUG_MODE)
+            Bukkit.getLogger().info(message + " from " + toString());
     }
 
 }
