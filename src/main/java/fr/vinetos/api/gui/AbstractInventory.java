@@ -110,7 +110,7 @@ public abstract class AbstractInventory {
     }
 
     public boolean isValidOpener(ItemStack itemStack) {
-        return itemStack != null && (opener == null || opener.getType() == itemStack.getType() && opener.getData() == itemStack.getData() && opener.getAmount() == itemStack.getAmount() && (opener.hasItemMeta() && itemStack.hasItemMeta() && opener.getItemMeta().getDisplayName().toLowerCase().equals(itemStack.getItemMeta().getDisplayName().toLowerCase())));
+        return opener != null && itemStack != null && (opener.getType() == itemStack.getType() && opener.getData() == itemStack.getData() && opener.getAmount() == itemStack.getAmount() && (opener.hasItemMeta() && itemStack.hasItemMeta() && opener.getItemMeta().getDisplayName().toLowerCase().equals(itemStack.getItemMeta().getDisplayName().toLowerCase())));
     }
 
     public int getSlots() {
