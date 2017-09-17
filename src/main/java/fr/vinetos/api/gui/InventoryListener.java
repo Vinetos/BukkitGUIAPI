@@ -82,6 +82,7 @@ public class InventoryListener implements Listener {
         // React and call abstract methods
         AbstractInventory.getAbstractInventories().stream()
                 // Filter inventories to find which use the item
+                .filter(inventory -> inventory.getDisplayName().equals(event.getInventory().getName()) || inventory.getName().equals(event.getInventory().getName()))
                 .filter(inventory -> inventory.getItems().contains(itemStackSlot))
                 // Call abstract methods
                 .forEach(inventory ->
