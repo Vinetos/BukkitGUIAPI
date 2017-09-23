@@ -59,7 +59,7 @@ public abstract class AbstractInventory {
     private final String name;
     private final int slots;
     private String displayName;
-    private ArrayList<ItemStackSlot> items;
+    private ArrayList<InventoryItemSlot> items;
     protected ItemStack opener;
     private Inventory inventory;
 //    private List<Inventory> inventories;
@@ -117,7 +117,7 @@ public abstract class AbstractInventory {
         return slots;
     }
 
-    public final List<ItemStackSlot> getItems() {
+    public final List<InventoryItemSlot> getItems() {
         return Collections.unmodifiableList(items);
     }
 
@@ -136,8 +136,8 @@ public abstract class AbstractInventory {
             addItem(entry.getKey(), entry.getValue());
     }
 
-    public void addItems(ItemStackSlot... items) {
-        for (ItemStackSlot item : items)
+    public void addItems(InventoryItemSlot... items) {
+        for (InventoryItemSlot item : items)
             addItem(item.getSlot(), item.getItemStack());
     }
 
@@ -151,7 +151,7 @@ public abstract class AbstractInventory {
 
         } else {
             List<Integer> availableSlots = IntStream.rangeClosed(0, inventory.getSize()).boxed().collect(Collectors.toList());
-            availableSlots.removeAll(items.stream().map(ItemStackSlot::getSlot).collect(Collectors.toList()));
+            availableSlots.removeAll(items.stream().map(InventoryItemSlot::getSlot).collect(Collectors.toList()));
 
             if (stacks.length > availableSlots.size())
                 throw new IllegalArgumentException("There are too much item to add !");
@@ -169,6 +169,19 @@ public abstract class AbstractInventory {
         items.forEach(item -> inventory.setItem(item.getSlot(), item.getItemStack()));
 
         player.openInventory(inventory);
+    }
+
+    public void update() {
+        // recreate inventory
+        inventory = Bukkit.createInventory(null, slots, displayName);
+
+        // Update needed item
+        for (InventoryItemSlot is : items)
+            if (is instanceof UpdatableItemStackSlot)
+                ((UpdatableItemStackSlot) is).update();
+
+        // Fill inventory
+        items.forEach(item -> inventory.setItem(item.getSlot(), item.getItemStack()));
     }
 
     public void remove() {

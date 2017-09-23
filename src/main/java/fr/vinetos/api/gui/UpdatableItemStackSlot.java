@@ -39,12 +39,12 @@ package fr.vinetos.api.gui;
 
 import org.bukkit.inventory.ItemStack;
 
-public class ItemStackSlot implements InventoryItemSlot {
+public abstract class UpdatableItemStackSlot implements InventoryItemSlot {
 
-    private final ItemStack itemStack;
     private final int slot;
+    private ItemStack itemStack;
 
-    public ItemStackSlot(ItemStack itemStack, int slot) {
+    public UpdatableItemStackSlot(ItemStack itemStack, int slot) {
         this.itemStack = itemStack;
         this.slot = slot;
     }
@@ -54,17 +54,23 @@ public class ItemStackSlot implements InventoryItemSlot {
         return itemStack;
     }
 
+    public void setItemStack(ItemStack itemStack) {
+        this.itemStack = itemStack;
+    }
+
     @Override
     public int getSlot() {
         return slot;
     }
+
+    public abstract void update();
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        ItemStackSlot that = (ItemStackSlot) o;
+        UpdatableItemStackSlot that = (UpdatableItemStackSlot) o;
 
         if (slot != that.slot) return false;
         return itemStack != null ? itemStack.equals(that.itemStack) : that.itemStack == null;
@@ -79,7 +85,7 @@ public class ItemStackSlot implements InventoryItemSlot {
 
     @Override
     public String toString() {
-        return "ItemStackSlot{" + "itemStack=" + itemStack
+        return "UpdatableItemStackSlot{" + "itemStack=" + itemStack
                 + ",slot=" + slot + '}';
     }
 }
